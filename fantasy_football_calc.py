@@ -17,18 +17,14 @@ flx = flx[ ~ ( flx.Player.isin(rb.Player) | flx.Player.isin(wr.Player) ) ]
 flx = flx[:12]
 
 for df in [rb, qb, wr, te, flx]:
-    
     df.insert(7, "Pos. Mean", np.repeat(0, len(df)))
-    
     #  calculate points / week among position group, BUT remove given player from position group
     #  avg is estimate of players you will likely face at that position group, and you won't face your own player
-    for i in range( len(df) ):
-        df.iloc[i, 7] = ( sum( df['Avg'] ) - list( df['Avg'] )[i] ) / ( len(df) - 1 )
+    for i in range(len(df)):
+        df.iloc[i, 7] = (sum( df['Avg']) - list(df['Avg'] )[i]) / (len(df) - 1)
         
 for df in [rb, qb, wr, te, flx]:
-    
     df.insert(8, "Diff", np.repeat(0, len(df)))
-    
     #  calculate difference between given players expected points / week and that of his position group
     for i in range( len(df) ):
         df.iloc[i, 8] = df.iloc[i, 6] - df.iloc[i, 7]
@@ -36,7 +32,6 @@ for df in [rb, qb, wr, te, flx]:
 df = pd.concat([rb, qb, wr, te])
 
 with pd.ExcelWriter('fantasy_cheatsheet_2021.xlsx') as writer:  
-
     #  export pandas DataFrame to xlsx workbook, one worksheet for potential starters and another for flex
     df.to_excel(writer, sheet_name = 'Starters')
     flx.to_excel(writer, sheet_name = 'Flex')
