@@ -9,4 +9,4 @@ players are not necessarily the ones that score the most absolute points but, ra
 
 More detail and justification can be found in the comments included in the .py file. 
 
-And, for those wondering, I won first place in the league that year.
+And for all it's worth, I did end up winning first place in the league that year!
